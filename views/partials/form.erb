@@ -1,0 +1,28 @@
+<form action="/<%= @animal[:id] %>" method="post"> <!-- this will work as a new form when no ID, so a new form, then an edit form when an ID exists-->
+  <div>
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Enter a name of the animal" value="<%= @animal[:name] %>">
+  </div>
+  <div>
+    <label>Species</label>
+    <input type="text" name="species" placeholder="Enter the species" value="<%= @animal[:species] %>">
+  </div>
+  <div>
+    <label>Lifespan</label>
+    <input type="text" name="lifespan" placeholder="Enter its lifespan" value="<%= @animal[:lifespan] %>">
+  </div>
+  <div>
+    <label>Diet</label>
+    <input type="text" name="diet" placeholder="Enter its diet" value="<%= @animal[:diet] %>">
+  </div>
+  <div>
+    <label>Habitat</label>
+    <input type="text" name="habitat" placeholder="Enter its habitat" value="<%= @animal[:habitat] %>">
+  </div>
+  <div>
+    <input type="submit" value="Save Post">
+  </div>
+  <% if(@animal[:id] != "") %>
+  <input type="hidden" name="_method" value="put">
+  <% end %>
+</form>

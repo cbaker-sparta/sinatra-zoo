@@ -1,0 +1,10 @@
+<h1>Name: <%= @animal[:name] %></h1>
+<p>Species: <%= @animal[:species]%></p>
+<p>Lifespan: <%= @animal[:lifespan]%></p>
+<p>Diet: <%= @animal[:diet]%></p>
+<p>Habitat: <%= @animal[:habitat]%></p>
+<a href="/<%= @animal[:id] %>/edit">Edit</a>
+<form action="/<%= @animal[:id] %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>
