@@ -14,7 +14,9 @@ class PostController < Sinatra::Base
       species: "Primate",
       lifespan: "35-40 years",
       diet: "Herbivore",
-      habitat: "Forest/Jungle"
+      habitat: "Forest/Jungle",
+      image: "./images/gorilla.jpg",
+      alt_tag: "Picture of a Gorilla"
     },
     {
       id: 1,
@@ -22,7 +24,9 @@ class PostController < Sinatra::Base
       species: "Chiroptera",
       lifespan: "9-10 years",
       diet: "Carnivore",
-      habitat: "Caves"
+      habitat: "Caves",
+      image: "./images/vampire_bat.jpg",
+      alt_tag: "Picture of a Vampire Bat"
     },
     {
       id: 2,
@@ -30,7 +34,9 @@ class PostController < Sinatra::Base
       species: "Serpentes",
       lifespan: "10-12 years",
       diet: "Carnivore",
-      habitat: "Tropical"
+      habitat: "Tropical",
+      image: "./images/anaconda.jpg",
+      alt_tag: "Picture of an Anaconda"
     },
     {
       id: 3,
@@ -38,7 +44,9 @@ class PostController < Sinatra::Base
       species: "Spiderus-Pigi",
       lifespan: "Infinity - we are all spider-pigs",
       diet: "The souls of the fallen",
-      habitat: "Our hearts and minds"
+      habitat: "Our hearts and minds",
+      image: "./images/spiderpig.jpeg",
+      alt_tag: "Picture of the Spider-Pig"
     },
     {
       id: 4,
@@ -46,7 +54,9 @@ class PostController < Sinatra::Base
       species: "Marsupial",
       lifespan: "13-18 years",
       diet: "Herbivore",
-      habitat: "Forest"
+      habitat: "Forest",
+      image: "./images/koala.jpg",
+      alt_tag: "Picture of a Koala"
     }]
 
   get "/" do
@@ -62,7 +72,9 @@ class PostController < Sinatra::Base
       species: "",
       lifespan: "",
       diet: "",
-      habitat: ""
+      habitat: "",
+      image: "",
+      alt_tag: ""
     }
     erb :'posts/new'
   end
@@ -75,7 +87,9 @@ class PostController < Sinatra::Base
       species: params[:species],
       lifespan: params[:lifespan],
       diet: params[:diet],
-      habitat: params[:habitat]
+      habitat: params[:habitat],
+      image: params[:image],
+      alt_tag: params[:alt_tag]
     }
      $animals.push(new_animal)
      redirect '/'
@@ -101,6 +115,8 @@ class PostController < Sinatra::Base
     animal[:lifespan] = params[:lifespan]
     animal[:diet] = params[:diet]
     animal[:habitat] = params[:habitat]
+    animal[:image] = params[:image]
+    animal[:alt_tag] = params[:alt_tag]
     $animals[id] = animal
 
     redirect '/'

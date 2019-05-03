@@ -3,6 +3,7 @@
 <p>Lifespan: <%= @animal[:lifespan]%></p>
 <p>Diet: <%= @animal[:diet]%></p>
 <p>Habitat: <%= @animal[:habitat]%></p>
+<img src="<%= @animal[:image] %>" alt="<%= @animal[:alt_tag] %>">
 <a href="/<%= @animal[:id] %>/edit">Edit</a>
 <form action="/<%= @animal[:id] %>" method="post">
   <input type="hidden" name="_method" value="DELETE">
