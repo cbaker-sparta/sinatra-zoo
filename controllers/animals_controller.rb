@@ -1,4 +1,4 @@
-class PostController < Sinatra::Base
+class AnimalsController < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
 
@@ -54,7 +54,7 @@ class PostController < Sinatra::Base
       species: "Marsupial",
       lifespan: "13-18 years",
       diet: "Herbivore",
-      habitat: "Forest", 
+      habitat: "Forest",
       image: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5OS83MTYvb3JpZ2luYWwva29hbGFzLXdpdGgtY2hsYW15ZGlhLmpwZw==",
       alt_tag: "Picture of a Koala"
     }]
