@@ -1,34 +1,58 @@
-<form action="/<%= @animal[:id] %>" method="post"> <!-- this will work as a new form when no ID, so a new form, then an edit form when an ID exists-->
+<form action="/<%= @animal.animalId %>" method="post"> <!-- this will work as a new form when no ID, so a new form, then an edit form when an ID exists-->
   <div>
     <label>Name</label>
-    <input type="text" name="name" placeholder="Enter a name of the animal" value="<%= @animal[:name] %>">
+    <input type="text" name="name" placeholder="Enter a name of the animal" value="<%= @animal.name %>">
   </div>
   <div>
     <label>Species</label>
-    <input type="text" name="species" placeholder="Enter the species" value="<%= @animal[:species] %>">
+    <input type="text" name="species" placeholder="Enter the species" value="<%= @animal.species %>">
   </div>
   <div>
     <label>Lifespan</label>
-    <input type="text" name="lifespan" placeholder="Enter its lifespan" value="<%= @animal[:lifespan] %>">
+    <input type="text" name="lifespan" placeholder="Enter its lifespan" value="<%= @animal.lifespan %>">
   </div>
   <div>
     <label>Diet</label>
-    <input type="text" name="diet" placeholder="Enter its diet" value="<%= @animal[:diet] %>">
+    <input type="text" name="diet" placeholder="Enter its diet" value="<%= @animal.diet %>">
   </div>
   <div>
     <label>Habitat</label>
-    <input type="text" name="habitat" placeholder="Enter its habitat" value="<%= @animal[:habitat] %>">
+    <input type="text" name="habitat" placeholder="Enter its habitat" value="<%= @animal.habitat %>">
   </div>
   <div>
     <label>Image</label>
-    <input type="file" name="image" accept="image/*" value="<%= @animal[:image] %>">
+    <input type="file" name="image" accept="image/*" value="<%= @animal.image %>">
     <label>Alt-Tag</label>
-    <input type="text" name="alt_tag" placeholder="Enter an alt-tag/description for the image" value="<%= @animal[:alt_tag] %>">
+    <input type="text" name="alt_tag" placeholder="Enter an alt-tag/description for the image" value="<%= @animal.alt_tag %>">
   </div>
   <div>
     <input type="submit" value="Save Post">
   </div>
-  <% if(@animal[:id] != "") %>
+  <% if(@animal.animalId != "") %>
+  <input type="hidden" name="_method" value="put">
+  <% end %>
+</form>
+<form action="/<%= @region.regionId %>" method="post">
+  <div>
+    <label>Region</label>
+    <input type="text" name="name" placeholder="Enter a name of region" value="<%= @region.region %>">
+  </div>
+  <div>
+    <input type="submit" value="Save Post">
+  </div>
+  <% if(@region.regionId != "") %>
+  <input type="hidden" name="_method" value="put">
+  <% end %>
+</form>
+<form action="/<%= @class.classId %>" method="post">
+  <div>
+    <label>Class</label>
+    <input type="text" name="name" placeholder="Enter a name of region" value="<%= /@class.class_description %>">
+  </div>
+  <div>
+    <input type="submit" value="Save Post">
+  </div>
+  <% if(@class.classId != "") %>
   <input type="hidden" name="_method" value="put">
   <% end %>
 </form>
