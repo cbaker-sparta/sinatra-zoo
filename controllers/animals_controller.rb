@@ -8,73 +8,73 @@ class AnimalsController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get "/" do
+  get "animals/" do
     @title = "Richmond Zoo"
-    @animals = $animals
-    erb :'posts/index'
+    @animals = Animal.all
+    erb :'posts/animals/index'
   end
 
-  get "/new" do
-    @animal = {
-      id: "",
-      name: "",
-      species: "",
-      lifespan: "",
-      diet: "",
-      habitat: "",
-      image: "",
-      alt_tag: ""
-    }
-    erb :'posts/new'
+  get "animals/new" do
+    @animal = Animal.new
+    erb :'posts/animals/new'
   end
 
-  post "/" do
+  post "animals/" do
 
-    new_animal = {
-      id: $animals.length,
-      name: params[:name],
-      species: params[:species],
-      lifespan: params[:lifespan],
-      diet: params[:diet],
-      habitat: params[:habitat],
-      image: params[:image],
-      alt_tag: params[:alt_tag]
-    }
-     $animals.push(new_animal)
-     redirect '/'
+    animal = Animal.new
+
+    animal.name = params[:name]
+    animal.class = params[:class]
+    animal.lifespan = params[:lifespan]
+    animal.diet = params[:diet]
+    animal.habitat = params[:habitat]
+    animal.region = params[:region]
+    animal.image = params[:image]
+    animal.alt_tag = params[:alt_tag]
+    animal.classId = params[:classId]
+    animal.regionId = params[:regionId]
+
+    animal.save
+
+    redirect 'home/'
   end
 
-  get "/:id" do
+  get "animals/:id" do
     id = params[:id].to_i
-    @animal = $animals[id]
-    erb :'posts/show'
+    @animal = Animal.find(animalId)
+    erb :'posts/animals/show'
   end
 
-  get "/:id/edit" do
+  get "animals/:id/edit" do
     id = params[:id].to_i
-    @animal = $animals[id]
-    erb :'posts/edit'
+    @animal = Animal.find(animalId)
+    erb :'posts/animals/edit'
   end
 
   put "/:id" do
     id = params[:id].to_i
-    animal = $animals[id]
-    animal[:name] = params[:name]
-    animal[:species] = params[:species]
-    animal[:lifespan] = params[:lifespan]
-    animal[:diet] = params[:diet]
-    animal[:habitat] = params[:habitat]
-    animal[:image] = params[:image]
-    animal[:alt_tag] = params[:alt_tag]
-    $animals[id] = animal
+    animal = Animal.find(animalId)
 
-    redirect '/'
+    animal.name = params[:name]
+    animal.class = params[:class]
+    animal.lifespan = params[:lifespan]
+    animal.diet = params[:diet]
+    animal.habitat = params[:habitat]
+    animal.region = params[:region]
+    animal.image = params[:image]
+    animal.alt_tag = params[:alt_tag]
+    animal.classId = params[:classId]
+    animal.regionId = params[:regionId]
+
+    animal.save
+
+    redirect 'animals/'
   end
 
   delete "/:id" do
     id = params[id].to_i
-    $animals.delete_at(id)
-    redirect '/'
+    Animal.destroy(animalId)
+    redirect 'animals/'
   end
 
 end

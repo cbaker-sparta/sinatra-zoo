@@ -1,0 +1,12 @@
+<h1>Name: <%= @animal.name %></h1>
+<p>Class: <%= @animal.class %></p>
+<p>Lifespan: <%= @animal.lifespan %></p>
+<p>Diet: <%= @animal.diet %></p>
+<p>Habitat: <%= @animal.habitat %></p>
+<img src="<%= @animal.image %>" alt="<%= @animal.alt_tag %>">
+<a href="animals/<%= @animal.animalId %>/edit">Edit</a>
+<a href="animals/<%= @animal.animalId %>">Delete</a>
+<form action="/<%= @animal.id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>
