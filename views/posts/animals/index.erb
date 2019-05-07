@@ -2,9 +2,9 @@
 <% @animals.each do |animal| %>
 <div>
   <h3>
-    <a href="/<%= animal.id %>"><%= animal.name %></a>
+    <a href="/<%= animal.animalId %>"><%= animal.name %></a>
   </h3>
-    <p>Species: <%= animal.class %></p>
+    <p>Class: <%= animal.class %></p>
     <p>Lifespan: <%= animal.lifespan %></p>
     <p>Diet: <%= animal.diet %></p>
     <p>Habitat: <%= animal.habitat %></p>

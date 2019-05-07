@@ -1,4 +1,4 @@
-class AnimalsController < Sinatra::Base
+class ClassesController < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
 
