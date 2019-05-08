@@ -1,0 +1,9 @@
+<h1>Name: <%= @region.region %></h1>
+<p>Continent: <%= @region.continent %></p>
+<img src="<%= @region.map_image %>" alt="<%= @region.map_alt %>">
+<a href="/regions/<%= @region.region_id %>/edit">Edit</a>
+<a href="/regions/<%= @animal.region_id %>">Delete</a>
+<form action="/<%= @region.region_id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>

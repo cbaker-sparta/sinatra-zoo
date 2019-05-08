@@ -1,7 +1,7 @@
 require 'pg'
 
 class Animal
-  attr_accessor(:animalId, :name, :class, :lifespan, :diet, :habitat, :region, :image, :alt_tag, :regionId, :classId)
+  attr_accessor(:animal_id, :name, :class, :lifespan, :diet, :habitat, :region, :image, :alt_tag, :region_id, :class_id)
 
   def self.open_connection
     connection = PG.connect(dbname: 'animal_db')
@@ -10,7 +10,7 @@ class Animal
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT name, class, lifespan, diet, habitat, region, image, animals.alt_tag FROM animals INNER JOIN regions ON animals.regionId = regions.regionId INNER JOIN classes on animals.classId = classes.classId ORDER BY animalId"
+    sql = "SELECT * FROM animals INNER JOIN regions ON animals.region_id = regions.region_id INNER JOIN classes on animals.class_id = classes.class_id ORDER BY animal_id"
 
     results = connection.exec(sql)
 
@@ -21,14 +21,14 @@ class Animal
     animals
   end
 
-  def self.find(animalId)
+  def self.find(animal_id)
     connection = self.open_connection
 
-    sql = "SELECT * FROM animals WHERE animalId = #{animalId} LIMIT 1"
+    sql = "SELECT * FROM animals INNER JOIN regions ON animals.region_id = regions.region_id INNER JOIN classes on animals.class_id = classes.class_id WHERE animal_id = #{animal_id} LIMIT 1"
 
     animals = connection.exec(sql)
 
-    animal = self.hydrate(posts[0])
+    animal = self.hydrate(animals[0])
 
     animal
   end
@@ -36,7 +36,8 @@ class Animal
   def self.hydrate(animal_data)
     animal = Animal.new
 
-    animal.animalId = animal_data['animalId']
+    animal.animal_id = animal_data['animal_id']
+    animal.name = animal_data['name']
     animal.class = animal_data['class']
     animal.lifespan = animal_data['lifespan']
     animal.diet = animal_data['diet']
@@ -44,34 +45,29 @@ class Animal
     animal.region = animal_data['region']
     animal.image = animal_data['image']
     animal.alt_tag = animal_data['alt_tag']
-    animal.regionId = animal_data['regionId']
-    animal.classId = animal_data['classId']
+    animal.region_id = animal_data['region_id']
+    animal.class_id = animal_data['class_id']
 
     animal
   end
 
   def save
     connection = Animal.open_connection
-    if (!self.animalId)
-      sql = "INSERT INTO regions (region) VALUES ('#{self.region}');
-             INSERT INTO classes (class) VALUES ('#{self.class}');
-             INSERT INTO animals (name, lifespan, diet, habitat, image, alt_tag, classId, regionId) VALUES ('#{self.name}', '#{self.diet}', '#{self.lifespan}', '#{self.habitat}', '#{self.image}', '#{self.alt_tag}', '#{Region.regionId}', '#{Class.classId}');"
+    if (!self.animal_id)
+      sql = "INSERT INTO animals (name, lifespan, diet, habitat, image, alt_tag, class_id, region_id) VALUES ('#{self.name}', '#{self.lifepsan}', '#{self.diet}', '#{self.habitat}', '#{self.image}', '#{self.alt_tag}', #{self.class_id}, #{self.region_id}')"
 
     else
-      sql = "UPDATE regions SET region='#{self.region}' WHERE regionId=animals.regionId;
-             UPDATE regions SET class='#{self.class}' WHERE classId=animals.classId;
-             UPDATE animals SET name='#{self.name}', diet='#{self.diet}', lifespan='#{self.lifespan}', habitat='#{self.habitat}', image='#{self.image}', alt_tag='#{self.alt_tag}' WHERE animalId=#{self.animalId}"
- #           UPDATE animals, regions, classes INNER JOIN regions ON animals.regionId = regions.regionId INNER JOIN classes ON animals.classId = classes.classId SET region='#{self.region}' WHERE regionId=animals.regionId;
+      sql = "UPDATE animals SET name='#{self.name}', lifespan='#{self.lifespan}', diet='#{self.diet}', habitat='#{self.habitat}', image='#{self.image}', alt_tag='#{self.alt_tag}', class_id=#{self.class_id}, region_id=#{self.region_id} WHERE animal_id=#{self.animal_id}"
 
     end
 
     connection.exec(sql)
   end
 
-  def self.destroy(animalId)
+  def self.destroy(animal_id)
     connection = self.open_connection
 
-    sql = "DELETE FROM animals where animalId = #{animalId}"
+    sql = "DELETE FROM animals WHERE animal_id = #{animal_id}"
 
     connection.exec(sql)
   end

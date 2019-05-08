@@ -3,10 +3,11 @@
 <p>Lifespan: <%= @animal.lifespan %></p>
 <p>Diet: <%= @animal.diet %></p>
 <p>Habitat: <%= @animal.habitat %></p>
+<p>Region: <%= @animal.region %></p>
 <img src="<%= @animal.image %>" alt="<%= @animal.alt_tag %>">
-<a href="animals/<%= @animal.animalId %>/edit">Edit</a>
-<a href="animals/<%= @animal.animalId %>">Delete</a>
-<form action="/<%= @animal.animalId %>" method="post">
+<a href="/animals/<%= @animal.animal_id %>/edit">Edit</a>
+<a href="/animals/<%= @animal.animal_id %>">Delete</a>
+<form action="/<%= @animal.animal_id %>" method="post">
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete">
 </form>

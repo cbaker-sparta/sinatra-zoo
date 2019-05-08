@@ -1,0 +1,8 @@
+<h1>Class: <%= @class.class %></h1>
+<p>Description: <%= @class.class_description %></p>
+<a href="/classes/<%= @class.class_id %>/edit">Edit</a>
+<a href="/classes/<%= @class.class_id %>">Delete</a>
+<form action="/<%= @class.class_id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form>

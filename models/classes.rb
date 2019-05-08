@@ -1,71 +1,63 @@
 require 'pg'
 
 class Class
-  attr_accessor(:classId, :class, :class_description)
+  attr_accessor(:class_id, :class, :class_description)
 
   def self.open_connection
-    connection = PG.connect(dbname: 'class_db')
+    connection = PG.connect(dbname: 'animal_db')
   end
 
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT class, class_description FROM classes ORDER BY classId"
+    sql = "SELECT * FROM classes"
 
     results = connection.exec(sql)
 
-    classes = results.map do |class|
-      self.hydrate(class)
+    classes = results.map do |new_class|
+      self.hydrate(new_class)
     end
-
     classes
   end
 
-  def self.find(classId)
+  def self.find(class_id)
 
     connection = self.open_connection
 
-    sql = "SELECT * FROM classes WHERE classId = #{classId} LIMIT 1"
+    sql = "SELECT * FROM classes WHERE class_id = #{class_id} LIMIT 1"
 
     classes = connection.exec(sql)
 
-    class = self.hydrate(posts[0])
+    new_class = self.hydrate(classes[0])
 
-    class
+    new_class
   end
 
   def self.hydrate(class_data)
-    class = class.new
+    new_class = Class.new
 
-    class.classId = class_data['classId']
-    class.class = class_data['class']
-    class.class_description = class_data['class_description']
+    new_class.class_id = class_data['class_id']
+    new_class.class = class_data['class']
+    new_class.class_description = class_data['class_description']
 
-    class
+    new_class
   end
 
-#   def save
-#     connection = class.open_connection
-#    if (!self.animalId)
-#    sql = "INSERT INTO regions (region) VALUES ('#{self.region}');
-#           INSERT INTO classes (class) VALUES ('#{self.class}');
-#           INSERT INTO animals (name, lifespan, diet, habitat, image, alt_tag, classId, regionId) VALUES ('#{self.name}', '#{self.diet}', '#{self.lifespan}', '#{self.habitat}', '#{self.image}', '#{self.alt_tag}', '#{Region.regionId}', '#{Class.classId}');"
-#
-#    else
-#    sql = "UPDATE regions SET region='#{self.region}' WHERE regionId=animals.regionId;
-#           UPDATE classes SET class='#{self.class}' WHERE classId=animals.classId;
-#           UPDATE animals SET name='#{self.name}', diet='#{self.diet}', lifespan='#{self.lifespan}', habitat='#{self.habitat}', image='#{self.image}', alt_tag='#{self.alt_tag}' WHERE animalId=#{self.animalId}"
-# #           UPDATE animals, regions, classes INNER JOIN regions ON animals.regionId = regions.regionId INNER JOIN classes ON animals.classId = classes.classId SET region='#{self.region}' WHERE regionId=animals.regionId;
-#
-#    end
-#
-#     connection.exec(sql)
-#   end
+  def save
+    connection = Class.open_connection
+   if (!self.class_id)
+   sql = "INSERT INTO classes (class, class_description) VALUES ('#{self.class}', '#{self.class_description}')"
+   else
+   sql = "UPDATE classes SET class='#{self.class}', class_description='#{self.class_description}' WHERE class_id=classes.class_id;"
+   end
 
-  def self.destroy(classId)
+    connection.exec(sql)
+  end
+
+  def self.destroy(class_id)
     connection = self.open_connection
 
-    sql = "DELETE FROM classes where classId = #{classId}"
+    sql = "DELETE FROM classes WHERE class_id = #{class_id}"
 
     connection.exec(sql)
   end

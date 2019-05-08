@@ -1,0 +1,22 @@
+<form action="/<%= @region.region_id %>" method="post"> <!-- this will work as a new form when no ID, so a new form, then an edit form when an ID exists-->
+  <div>
+    <label>Region Name: </label>
+    <input type="text" name="region" placeholder="Enter a name of the region" value="<%= @region.region %>">
+  </div>
+  <div>
+    <label>Continent: </label>
+    <input type="text" name="continent" placeholder="Enter the continent" value="<%= @region.continent %>">
+  </div>
+  <div>
+    <label>Map Image: </label>
+    <input type="text" name="image" placeholder="Enter the URL/URI of the map image" value="<%= @region.map_image %>">
+    <label>Alt-Tag:</label>
+    <input type="text" name="map_alt" placeholder="Enter an alt-tag/description for the map" value="<%= @region.map_alt %>">
+  </div>
+  <div>
+    <input type="submit" value="Save Post">
+  </div>
+  <% if(@region.region_id != "") %>
+  <input type="hidden" name="_method" value="put">
+  <% end %>
+</form>

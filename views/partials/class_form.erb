@@ -1,0 +1,16 @@
+<form action="/<%= @class.class_id %>" method="post"> <!-- this will work as a new form when no ID, so a new form, then an edit form when an ID exists-->
+  <div>
+    <label>Class Name: </label>
+    <input type="text" name="class" placeholder="Enter a name of the class" value="<%= @class.class %>">
+  </div>
+  <div>
+    <label>Class Description: </label>
+    <input type="text" name="class_description" placeholder="Enter the description of the class" value="<%= @class.class_description %>">
+  </div>
+  <div>
+    <input type="submit" value="Save Post">
+  </div>
+  <% if(@class.class_id != "") %>
+  <input type="hidden" name="_method" value="put">
+  <% end %>
+</form>

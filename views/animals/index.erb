@@ -1,9 +1,7 @@
 <h1>Richmond Zoo</h1>
 <% @animals.each do |animal| %>
 <div>
-  <h3>
-    <a href="/<%= animal.animalId %>"><%= animal.name %></a>
-  </h3>
+  <h3>Name: <a href="/animals/<%= animal.animal_id %>"><%= animal.name %></a></h3>
     <p>Class: <%= animal.class %></p>
     <p>Lifespan: <%= animal.lifespan %></p>
     <p>Diet: <%= animal.diet %></p>
