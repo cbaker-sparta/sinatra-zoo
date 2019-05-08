@@ -1,3 +1,5 @@
+require_relative '../models/animals'
+
 class AnimalsController < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
@@ -16,12 +18,12 @@ class AnimalsController < Sinatra::Base
     erb :'posts/animals/index'
   end
 
-  # get "/animals/new" do
-  #   @animal = Animal.new
-  #
-  #   erb :'posts/animals/new'
-  # end
-  #
+  get "/animals/new" do
+    @animal = Animal.new
+
+    erb :'posts/animals/new'
+  end
+
   # post "/animals/" do
   #
   #   animal = Animal.new

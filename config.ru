@@ -7,5 +7,5 @@ require_relative './controllers/animals_controller'
 use Rack::MethodOverride
 
 run AnimalsController
-use RegionsController
-use ClassesController
+# use RegionsController
+# use ClassesController
