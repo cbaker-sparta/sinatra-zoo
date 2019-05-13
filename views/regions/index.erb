@@ -1,0 +1,8 @@
+<h1>Geographical Regions</h1>
+<% @regions.each do |region| %>
+<div>
+  <h3>Region Name: <a href="/regions/<%= region.region_id %>"><%= region.region %></a></h3>
+    <p>Continent: <%= region.continent %></p>
+    <img src="<%= region.map_image %>" alt="<%= region.map_alt %>">
+</div>
+<% end %>
